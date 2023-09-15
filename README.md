@@ -49,16 +49,19 @@
 > 아키텍처 설계 항목 식별자: SAD_[Number]
 
 | Software Architecture Design ID | SAD_1 |
+| --- | --- |
 | Description | 조이스틱과 버튼에서 입력을 받아 처리한다. MCP 3008 ADC와 SPI 통신을 통해 아날로그 입력을 디지털 입력으로 변환해서 받는다. |
 | Related Functions | 조이스틱 및 버튼 입력 처리 |
 | System Design IDs | SD_1, SD_2, SD_3, SD_4, SD_5 |
 
 | Software Architecture Design ID | SAD_2 |
+| --- | --- |
 | Description | 작업 큐를 이용하여 가공된 입력을 패킷으로 가공해 넣는다. |
 | Related Functions | 패킷 생성 |
 | System Design IDs | SD_6 |
 
 | Software Architecture Design ID | SAD_3 |
+| --- | --- |
 | Description | 작업 큐의 패킷을 연결된 블루투스를 통해 내보낸다. |
 | Related Functions | 블루투스 통신 |
 | System Design IDs | SD_6 |
