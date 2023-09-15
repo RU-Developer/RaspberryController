@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/pi/RaspberryController/build",
+  "command": "/usr/bin/arm-linux-gnueabihf-g++    -g   -o CMakeFiles/RaspberryController.dir/main.cpp.o -c /home/pi/RaspberryController/main.cpp",
+  "file": "/home/pi/RaspberryController/main.cpp"
+},
+{
+  "directory": "/home/pi/RaspberryController/build",
+  "command": "/usr/bin/arm-linux-gnueabihf-g++    -g   -o CMakeFiles/RaspberryControllerTest.dir/test_main.cpp.o -c /home/pi/RaspberryController/test_main.cpp",
+  "file": "/home/pi/RaspberryController/test_main.cpp"
+}
+]

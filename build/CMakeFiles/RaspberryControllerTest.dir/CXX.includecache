@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/pi/RaspberryController/HighSensitivitySoundSensor.h
+wiringPi.h
+-
+wiringPiSPI.h
+-
+iostream
+-
+
+/home/pi/RaspberryController/test_main.cpp
+gtest/gtest.h
+-
+HighSensitivitySoundSensor.h
+/home/pi/RaspberryController/HighSensitivitySoundSensor.h
+
