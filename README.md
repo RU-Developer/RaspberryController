@@ -2,7 +2,7 @@
 - - -
 ## 프로젝트 간략 소개
 > 라즈베리파이를 사용하여 조이스틱과 버튼을 입력 받고 Unity로 만든 Windows 게임과 통신하는 프로젝트 <br />
-> 개발 언어: C++ < br />
+> 개발 언어: C++ <br />
 > 환경: Raspberry Pi 4 Model B Rev 1.2 / Raspbian GNU/Linux 10 (buster) <br />
 
 - - - 
