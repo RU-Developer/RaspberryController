@@ -73,7 +73,7 @@
 > 함수는 전부 private 접근 제한이 아닌 외부에서 사용하는 함수만 설계
 
 | Software Module Design ID | Function Name | Description | Software Architecture Design ID |
-| --- | --- | --- |
+| --- | --- | --- | --- |
 | SMD_RaspberryController_01 | void Run() | 라즈베리파이 컨트롤러의 모든 로직을 수행한다. 테스트 필요 없음 반환 값도 없다. | SAD_1 |
 | SMD_Module_01 | ModuleType GetModuleType() | 모듈의 타입을 반환한다. 모든 모듈은 생성했을 때 자신의 ModuleType enum을 가지고 있다. | SAD_1 |
 | SMD_Module_02 | virtual GetInputValue abstract | 현재 사용중인 모든 모듈들은 전부 라즈베리파이에서 입력을 받는 모듈들이다. 이 모듈을 상속하면 꼭 구현해야 하며, 모듈로부터 입력받은 값을 반환한다. | SAD_1 |
