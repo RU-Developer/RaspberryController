@@ -38,10 +38,10 @@
 | --- | --- | --- |
 | SD_1 | MCP 3008 ADC를 이용하여 SPI 통신을 통해 해당 조이스틱의 아날로그 출력을 디지털로 변환하여 입력 받는다. | R_1.RA_1 |
 | SD_2 | 입력 받은 X, Y 값을 위쪽이 0도가 되고 시계방향으로 각도가 증가하여 360도로 끝나는 값으로 변환한다. | R_1.RA_2 |
-| SD_3 | 왼쪽 조이스틱은 움직임과 조준을 입력 받는 값이며, 오른쪽 조이스틱은 조준 기능을 입력 받는다. 오른쪽 조이스틱으로 조준을 하고 있을 경우 왼쪽 조이스틱은 움직임만 조작한다. 작업큐에 넣을 때는 이전의 값과 동일한 경우 넣지 않는다. | R_1.RA_3 |
-| SD_4 | 버튼 눌림 값도 따로 처리한다. 누르기 시작했을 때 한번, 땠을 때 한번 작업큐에 넣는다. | R_1.RA_4 |
-| SD_5 | 눌린 버튼 번호와 눌림 여부를 작업큐에 넣는다. 이때 위와 동일하게 누르기 시작했을 때 한번, 땠을 때 한번 작업큐에 넣는다. | R_2.RA_1 |
-| SD_6 | 작업큐에 들어온 객체들의 필드를 하나씩 bit로 변경하여 패킷 번호, 패킷 사이즈와 함께 전송한다. 패킷의 처리 방식 역시 정의한다. | R_3.RA_1 |
+| SD_3 | 왼쪽 조이스틱은 움직임과 조준을 입력 받는 값이며, 오른쪽 조이스틱은 조준 기능을 입력 받는다. 오른쪽 조이스틱으로 조준을 하고 있을 경우 왼쪽 조이스틱은 움직임만 조작한다. | R_1.RA_3 |
+| SD_4 | 버튼도 조이스틱과 마찬가지로 눌렀을때, 땠을 때 값을 조작한다. | R_1.RA_4 |
+| SD_5 | 전체 키들을 묶어서 하나의 데이터(32bit 정수형)로 만든다. MSB(1bit), 버튼 번호와 눌림 여부(각 버튼당 1bit 총 9bit), 조이스틱의 움직임(2bit), 조준(8bit)로 20bit가 필요하기에 충분하다. | R_2.RA_1 |
+| SD_6 | 블루투스를 연결하고, 해당 데이터를 bluetooth를 통해 전송한다.(추후 언제든지 다른 통신 방식으로 변경될 수 있음) | R_3.RA_1 |
 
 - - -
 
@@ -50,21 +50,42 @@
 
 | Software Architecture Design ID | SAD_1 |
 | --- | --- |
-| Description | 조이스틱과 버튼에서 입력을 받아 처리한다. MCP 3008 ADC와 SPI 통신을 통해 아날로그 입력을 디지털 입력으로 변환해서 받는다. 왼쪽 조이스틱은 움직임과 조준을 모두 입력 받으며, 오른쪽 조이스틱으로 조준 중일 경우 왼쪽 조이스틱은 움직임만 처리한다. |
-| Related Functions | 조이스틱 및 버튼 입력 처리 |
-| System Design IDs | SD_1, SD_2, SD_3, SD_4, SD_5 |
+| Description | 조이스틱과 버튼에서 입력을 받아 처리한다. MCP 3008 ADC와 SPI 통신을 통해 아날로그 입력을 디지털 입력으로 변환해서 받는다. 왼쪽 조이스틱은 움직임과 조준을 모두 입력 받으며, 오른쪽 조이스틱으로 조준 중일 경우 왼쪽 조이스틱은 움직임만 처리한다. 대역폭 이슈가 없기 때문에 싱글스레드로 구현한다. RaceCondition을 고려할 필요가 없다. |
+| Related Classes | Module, ModuleManager, JoyStick, Button, MovingJoyStick, AimingJoyStick, RaspberryController |
+| System Design IDs | SD_1, SD_2, SD_3, SD_4 |
 
 | Software Architecture Design ID | SAD_2 |
 | --- | --- |
-| Description | 작업 큐를 이용하여 가공된 입력을 패킷으로 가공해 넣는다. |
-| Related Functions | 패킷 생성 |
-| System Design IDs | SD_6 |
+| Description | 입력들을 하나의 32bit 정수형 변수로 변경한다. 마찬가지로 멀티스레드는 고려할 필요가 없다. 이전의 데이터를 보관하여 현재 데이터와 다르다면 전송한다. |
+| Related Classes | PacketGenerator |
+| System Design IDs | SD_5 |
 
 | Software Architecture Design ID | SAD_3 |
 | --- | --- |
-| Description | 작업 큐의 패킷을 연결된 블루투스를 통해 내보낸다. |
-| Related Functions | 블루투스 통신 |
+| Description | 블루투스 통신을 통해 입력된 데이터를 전송한다. |
+| Related Classes | NetworkController, NetworkManager, BluetoothManager |
 | System Design IDs | SD_6 |
 
 - - -
 
+## 4. 모듈 설계
+> 모듈 설계 항목 식별자: SMD_ClassName_[Number]
+> 함수는 전부 private 접근 제한이 아닌 외부에서 사용하는 함수만 설계
+
+| Software Module Design ID | Function Name | Description | Software Architecture Design ID |
+| --- | --- | --- |
+| SMD_RaspberryController_01 | void Run() | 라즈베리파이 컨트롤러의 모든 로직을 수행한다. 테스트 필요 없음 반환 값도 없다. | SAD_1 |
+| SMD_Module_01 | ModuleType GetModuleType() | 모듈의 타입을 반환한다. 모든 모듈은 생성했을 때 자신의 ModuleType enum을 가지고 있다. | SAD_1 |
+| SMD_Module_02 | virtual GetInputValue abstract | 현재 사용중인 모든 모듈들은 전부 라즈베리파이에서 입력을 받는 모듈들이다. 이 모듈을 상속하면 꼭 구현해야 하며, 모듈로부터 입력받은 값을 반환한다. | SAD_1 |
+| SMD_Module_03 | virtual void Init() abstract | 모듈이 처음 생성될 때 재정의한 초기화 기능을 호출한다. | SAD_1 |
+| SMD_ModuleManager_01 | vector<Module*>& GetModules() | 현재 사용중인 모든 모듈을 vector에 넣어 반환한다. | SAD_1 |
+| SMD_ModuleManager_02 | void CreateModule(ModuleType type) | 모듈을 생성해서 관리한다. | SAD_1 |
+| SMD_PacketGenerator_01 | int32_t Generate() | 모듈 매니저를 통해 모듈을 가져와서 모든 모듈의 입력값을 받아서 32bit 정수형 타입으로 만들어서 반환한다. | SAD_2 |
+| SMD_NetworkController_01 | void Init() | 네트워크 매니저를 통해 블루투스 통신을 먼저 연결한다. 연결이 성공하면 보내기 시작할 수 있다. | SAD_3 |
+| SMD_NetworkController_02 | void IfChangedThenWrite() | 보내야 할 패킷이 이전의 패킷과 다르다면 전송한다. | SAD_3 |
+| SMD_NetworkManager_01 | virtual void Init() abstract | 네트워크를 연결한다. | SAD_3 |
+| SMD_NetworkManager_02 | virtual void send(int32_t data) abstract | 데이터를 전송한다. | SAD_3 |
+| SMD_BluetoothManager_01 | virtual void Init() override | 블루투스를 연결한다. | SAD_3 |
+| SMD_BluetoothManager_02 | virtual void send(int32_t data) abstract | 데이터를 전송한다. | SAD_3 |
+
+- - -
