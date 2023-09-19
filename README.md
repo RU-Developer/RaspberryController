@@ -86,6 +86,6 @@
 | SMD_NetworkManager_01 | virtual void Init() abstract | 네트워크를 연결한다. | SAD_3 |
 | SMD_NetworkManager_02 | virtual void send(int32_t data) abstract | 데이터를 전송한다. | SAD_3 |
 | SMD_BluetoothManager_01 | virtual void Init() override | 블루투스를 연결한다. | SAD_3 |
-| SMD_BluetoothManager_02 | virtual void send(int32_t data) abstract | 데이터를 전송한다. | SAD_3 |
+| SMD_BluetoothManager_02 | virtual void send(int32_t data) override | 데이터를 전송한다. | SAD_3 |
 
 - - -
