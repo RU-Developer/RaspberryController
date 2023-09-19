@@ -50,7 +50,7 @@
 
 | Software Architecture Design ID | SAD_1 |
 | --- | --- |
-| Description | 조이스틱과 버튼에서 입력을 받아 처리한다. MCP 3008 ADC와 SPI 통신을 통해 아날로그 입력을 디지털 입력으로 변환해서 받는다. |
+| Description | 조이스틱과 버튼에서 입력을 받아 처리한다. MCP 3008 ADC와 SPI 통신을 통해 아날로그 입력을 디지털 입력으로 변환해서 받는다. 왼쪽 조이스틱은 움직임과 조준을 모두 입력 받으며, 오른쪽 조이스틱으로 조준 중일 경우 왼쪽 조이스틱은 움직임만 처리한다. |
 | Related Functions | 조이스틱 및 버튼 입력 처리 |
 | System Design IDs | SD_1, SD_2, SD_3, SD_4, SD_5 |
 
