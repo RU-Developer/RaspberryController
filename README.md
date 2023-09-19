@@ -69,7 +69,7 @@
 - - -
 
 ## 4. 모듈 설계
-> 모듈 설계 항목 식별자: SMD_ClassName_[Number]
+> 모듈 설계 항목 식별자: SMD_ClassName_[Number] <br />
 > 함수는 전부 private 접근 제한이 아닌 외부에서 사용하는 함수만 설계
 
 | Software Module Design ID | Function Name | Description | Software Architecture Design ID |
