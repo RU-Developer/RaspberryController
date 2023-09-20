@@ -79,7 +79,7 @@
 | SMD_Module_03 | virtual void Init() abstract | 모듈이 처음 생성될 때 재정의한 초기화 기능을 호출한다. | SAD_1 |
 | SMD_ModuleManager_01 | vector<Module*>& GetModules() | 현재 사용중인 모든 모듈을 vector에 넣어 반환한다. | SAD_1 |
 | SMD_ModuleManager_02 | void CreateModule(ModuleType type) | 모듈을 생성해서 관리한다. | SAD_1 |
-| SMD_JoyStick_01 | virtual bool GetInputValue() | 조이스틱의 버튼 입력 여부를 반환한다. | SAD_1 |
+| SMD_JoyStick_01 | virtual bool GetInputValue() override | 조이스틱의 버튼 입력 여부를 반환한다. | SAD_1 |
 | SMD_JoyStick_02 | virtual void Init() override | 조이스틱의 GPIO 핀 모드 설정과 SPI 통신 설정을 한다. | SAD_1 |
 | SMD_JoyStick_03 | virtual int16_t GetX() | 조이스틱이 일정 범위에 속하면 조이스틱을 움직이지 않은 것으로 취급하여 맨 첫 비트를 1로 주고, 0 ~ 1023의 x값을 반환한다. | SAD_1 |
 | SMD_JoyStick_04 | virtual int16_t GetY() | 조이스틱 y좌표로 위의 x좌표와 동일하게 y좌표를 반환한다. | SAD_1 |
