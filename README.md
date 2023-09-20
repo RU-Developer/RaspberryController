@@ -94,7 +94,7 @@
 | SMD_BluetoothManager_02 | virtual void Send(int32_t data) override | 데이터를 전송한다. | SAD_3 |
 
 ### 클래스 다이어그램
-> ![RaspberryController_Class_Diagram](https://github.com/RU-Developer/RaspberryController/assets/61056453/f02b854d-d576-4a40-923c-40bec8bff6ff)
+> ![RaspberryController_Class_Diagram](https://github.com/RU-Developer/RaspberryController/assets/61056453/4d8604a3-851c-46f8-b94a-bc4e2c26b128)
 
 - - -
 
