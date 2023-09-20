@@ -40,7 +40,7 @@
 | SD_2 | 입력 받은 X, Y 값을 위쪽이 0도가 되고 시계방향으로 각도가 증가하여 360도로 끝나는 값으로 변환한다. | R_1.RA_2 |
 | SD_3 | 왼쪽 조이스틱은 움직임과 조준을 입력 받는 값이며, 오른쪽 조이스틱은 조준 기능을 입력 받는다. 오른쪽 조이스틱으로 조준을 하고 있을 경우 왼쪽 조이스틱은 움직임만 조작한다. | R_1.RA_3 |
 | SD_4 | 버튼도 조이스틱과 마찬가지로 눌렀을때, 땠을 때 값을 조작한다. | R_1.RA_4 |
-| SD_5 | 전체 키들을 묶어서 하나의 데이터(32bit 정수형)로 만든다. MSB(1bit), 버튼 번호와 눌림 여부(각 버튼당 1bit 총 9bit), 조이스틱의 움직임(2bit), 조준(8bit)으로 20bit가 필요하기에 충분하다. | R_2.RA_1 |
+| SD_5 | 전체 키들을 묶어서 하나의 데이터(32bit 정수형)로 만든다. MSB(1bit), 버튼 번호와 눌림 여부(각 버튼당 1bit 총 9bit), 조이스틱의 움직임(2bit), 조준(20bit)으로 32bit가 필요하기에 충분하다. | R_2.RA_1 |
 | SD_6 | 블루투스를 연결하고, 해당 데이터를 bluetooth를 통해 전송한다.(추후 언제든지 다른 통신 방식으로 변경될 수 있음) | R_3.RA_1 |
 
 - - -
@@ -51,7 +51,7 @@
 | Software Architecture Design ID | SAD_1 |
 | --- | --- |
 | Description | 조이스틱과 버튼에서 입력을 받아 처리한다. MCP 3008 ADC와 SPI 통신을 통해 아날로그 입력을 디지털 입력으로 변환해서 받는다. 왼쪽 조이스틱은 움직임과 조준을 모두 입력 받으며, 오른쪽 조이스틱으로 조준 중일 경우 왼쪽 조이스틱은 움직임만 처리한다. 대역폭 이슈가 없기 때문에 싱글스레드로 구현한다. RaceCondition을 고려할 필요가 없다. |
-| Related Classes | Module, ModuleManager, JoyStick, Button, MovingJoyStick, AimingJoyStick, RaspberryController |
+| Related Classes | Module, ModuleManager, JoyStick, Button, RaspberryController |
 | System Design IDs | SD_1, SD_2, SD_3, SD_4 |
 
 | Software Architecture Design ID | SAD_2 |
@@ -76,11 +76,17 @@
 | --- | --- | --- | --- |
 | SMD_RaspberryController_01 | void Run() | 라즈베리파이 컨트롤러의 모든 로직을 수행한다. 테스트 필요 없다. 반환 값도 없다. | SAD_1 |
 | SMD_Module_01 | ModuleType GetModuleType() | 모듈의 타입을 반환한다. 모든 모듈은 생성했을 때 자신의 ModuleType enum을 가지고 있다. | SAD_1 |
-| SMD_Module_02 | virtual GetInputValue abstract | 현재 사용중인 모든 모듈들은 전부 라즈베리파이에서 입력을 받는 모듈들이다. 이 모듈을 상속하면 꼭 구현해야 하며, 모듈로부터 입력받은 값을 반환한다. | SAD_1 |
+| SMD_Module_02 | virtual bool GetInputValue() abstract | 현재 사용중인 모든 모듈들은 전부 라즈베리파이에서 입력을 받는 모듈들이다. 이 모듈을 상속하면 꼭 구현해야 하며, 모듈로부터 입력받은 값을 반환한다. | SAD_1 |
 | SMD_Module_03 | virtual void Init() abstract | 모듈이 처음 생성될 때 재정의한 초기화 기능을 호출한다. | SAD_1 |
 | SMD_ModuleManager_01 | vector<Module*>& GetModules() | 현재 사용중인 모든 모듈을 vector에 넣어 반환한다. | SAD_1 |
 | SMD_ModuleManager_02 | void CreateModule(ModuleType type) | 모듈을 생성해서 관리한다. | SAD_1 |
-| SMD_PacketGenerator_01 | int32_t Generate() | 모듈 매니저를 통해 모듈을 가져와서 모든 모듈의 입력값을 받아서 32bit 정수형 타입으로 만들어서 반환한다. | SAD_2 |
+| SMD_JoyStick_01 | virtual bool GetInputValue() | 조이스틱의 버튼 입력 여부를 반환한다. | SAD_1 |
+| SMD_JoyStick_02 | virtual void Init() override | 조이스틱의 GPIO 핀 모드 설정과 SPI 통신 설정을 한다. | SAD_1 |
+| SMD_JoyStick_03 | virtual int16_t GetX() | 조이스틱이 일정 범위에 속하면 조이스틱을 움직이지 않은 것으로 취급하여 맨 첫 비트를 1로 주고, 0 ~ 1023의 x값을 반환한다. | SAD_1 |
+| SMD_JoyStick_04 | virtual int16_t GetY() | 조이스틱 y좌표로 위의 x좌표와 동일하게 y좌표를 반환한다. | SAD_1 |
+| SMD_Button_01 | virtual bool GetInputValue() override | 버튼의 눌림 여부를 반환한다. | SAD_1 |
+| SMD_Button_02 | virtual void Init() override | GPIO 핀모드를 설정한다. | SAD_1 |
+| SMD_PacketGenerator_01 | int32_t Generate() | 모듈 매니저를 통해 모듈을 가져와서 모든 모듈의 입력값을 받아서 32bit 정수형 타입으로 만들어서 반환한다.<br />MSB(1) 움직임(2)(가만히 10 왼쪽 00 오른쪽 01) 조준x좌표(10) 조준y좌표(10) 조이스틱L버튼(1) 조이스틱R버튼(1) 버튼1~7(7) | SAD_2 |
 | SMD_NetworkController_01 | void Init() | 네트워크 매니저를 통해 블루투스 통신을 먼저 연결한다. 연결이 성공하면 보내기 시작할 수 있다. | SAD_3 |
 | SMD_NetworkController_02 | void IfChangedThenWrite() | 보내야 할 패킷이 이전의 패킷과 다르다면 전송한다. | SAD_3 |
 | SMD_NetworkManager_01 | virtual void Init() abstract | 네트워크를 연결한다. | SAD_3 |
