@@ -89,8 +89,8 @@
 | SMD_NetworkController_01 | void Init() | 네트워크 매니저를 통해 블루투스 통신을 먼저 연결한다. 연결이 성공하면 보내기 시작할 수 있다. | SAD_3 |
 | SMD_NetworkController_02 | void IfChangedThenWrite() | 보내야 할 패킷이 이전의 패킷과 다르다면 전송한다. | SAD_3 |
 | SMD_NetworkManager_01 | virtual void Init() abstract | 네트워크를 연결한다. | SAD_3 |
-| SMD_NetworkManager_02 | virtual void send(int32_t data) abstract | 데이터를 전송한다. | SAD_3 |
+| SMD_NetworkManager_02 | virtual void Send(int32_t data) abstract | 데이터를 전송한다. | SAD_3 |
 | SMD_BluetoothManager_01 | virtual void Init() override | 블루투스를 연결한다. | SAD_3 |
-| SMD_BluetoothManager_02 | virtual void send(int32_t data) override | 데이터를 전송한다. | SAD_3 |
+| SMD_BluetoothManager_02 | virtual void Send(int32_t data) override | 데이터를 전송한다. | SAD_3 |
 
 - - -
