@@ -81,8 +81,7 @@
 | SMD_ModuleManager_02 | void CreateModule(ModuleType type) | 모듈을 생성해서 관리한다. | SAD_1 |
 | SMD_JoyStick_01 | virtual bool GetInputValue() override | 조이스틱의 버튼 입력 여부를 반환한다. | SAD_1 |
 | SMD_JoyStick_02 | virtual void Init() override | 조이스틱의 GPIO 핀 모드 설정과 SPI 통신 설정을 한다. | SAD_1 |
-| SMD_JoyStick_03 | int16_t GetX() | 조이스틱이 일정 범위에 속하면 조이스틱을 움직이지 않은 것으로 취급하여 맨 첫 비트를 1로 주고, 0 ~ 1023의 x값을 반환한다. | SAD_1 |
-| SMD_JoyStick_04 | int16_t GetY() | 조이스틱 y좌표로 위의 x좌표와 동일하게 y좌표를 반환한다. | SAD_1 |
+| SMD_JoyStick_03 | Coordinate GetCoordinate() | 조이스틱이 일정 범위에 속하면 조이스틱을 움직이지 않은 것으로 취급하여 맨 첫 비트를 1로 주고, 0 ~ 1023의 x, y값을 반환한다. | SAD_1 |
 | SMD_Button_01 | virtual bool GetInputValue() override | 버튼의 눌림 여부를 반환한다. | SAD_1 |
 | SMD_Button_02 | virtual void Init() override | GPIO 핀모드를 설정한다. | SAD_1 |
 | SMD_PacketGenerator_01 | int32_t Generate() | 모듈 매니저를 통해 모듈을 가져와서 모든 모듈의 입력값을 받아서 32bit 정수형 타입으로 만들어서 반환한다.<br />MSB(1) 움직임(2)(가만히 10 왼쪽 00 오른쪽 01) 조준x좌표(10) 조준y좌표(10) 조이스틱L버튼(1) 조이스틱R버튼(1) 버튼1~7(7) | SAD_2 |
@@ -94,7 +93,7 @@
 | SMD_BluetoothManager_02 | virtual void Send(int32_t data) override | 데이터를 전송한다. | SAD_3 |
 
 ### 클래스 다이어그램
-> ![RaspberryController_Class_Diagram](https://github.com/RU-Developer/RaspberryController/assets/61056453/4d8604a3-851c-46f8-b94a-bc4e2c26b128)
+> ![RaspberryController_Class_Diagram_1](https://github.com/RU-Developer/RaspberryController/assets/61056453/0a220919-9fea-4959-9da3-eed25509eeee)
 
 - - -
 
