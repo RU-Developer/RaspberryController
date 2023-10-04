@@ -6,16 +6,22 @@ enable_testing()
 
 # wiringPi 라이브러리를 찾음
 find_library(WIRINGPI_LIBRARIES NAMES wiringPi)
+
+# bluetooth 라이브러리를 찾음
+# find_library(BLUETOOTH_LIBRARIES NAMES bluetooth)
+
 # 실제 실행 파일 추가
 add_executable(RaspberryController main.cpp Module.cpp JoyStick.cpp)
-# wiringPi 라이브러리를 링크
-target_link_libraries(RaspberryController ${WIRINGPI_LIBRARIES})
+# 라이브러리를 링크
+# target_link_libraries(RaspberryController ${WIRINGPI_LIBRARIES} ${BLUETOOTH_LIBRARIES} pthread)
+target_link_libraries(RaspberryController ${WIRINGPI_LIBRARIES} pthread)
 
 # Google Test 라이브러리를 찾음
 find_package(GTest REQUIRED)
 # 테스트 실행 파일 추가
 add_executable(RaspberryControllerTest test_main.cpp)
 # wiringPi와 GoogleTest 라이브러리 + pthread를 링크
+# target_link_libraries(RaspberryControllerTest ${WIRINGPI_LIBRARIES} ${GTEST_LIBRARIES} ${BLUETOOTH_LIBRARIES} pthread)
 target_link_libraries(RaspberryControllerTest ${WIRINGPI_LIBRARIES} ${GTEST_LIBRARIES} pthread)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
