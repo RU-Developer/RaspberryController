@@ -24,7 +24,7 @@ public:
     virtual ~JoyStick();
 
     virtual void Init() override; // 조이스틱 타입에 따라 핀 설정
-    virtual bool GetInputValue() override; // 버튼 입력 반환
+    virtual int GetInputValue() override; // 버튼 입력 반환
 
 protected:
     void SPIChannelInit(); // 버퍼 초기화
