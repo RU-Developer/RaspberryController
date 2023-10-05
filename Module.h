@@ -17,7 +17,7 @@ public:
 
     virtual void Init() = 0;
     ModuleType GetModuleType() { return _type; }
-    virtual bool GetInputValue() = 0;
+    virtual int GetInputValue() = 0;
 };
 
 #endif

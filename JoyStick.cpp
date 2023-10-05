@@ -35,7 +35,7 @@ void JoyStick::Init()
     pinMode(_buttonPinNumber, INPUT);
 }
 
-bool JoyStick::GetInputValue()
+int JoyStick::GetInputValue()
 {
     // 반대 값이 버튼의 눌림 유무
     return !static_cast<bool>(digitalRead(_buttonPinNumber));
