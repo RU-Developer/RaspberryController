@@ -83,9 +83,6 @@ int main()
             manager->Send(data);
             prev = data;
         }
-
-        // cout << "prev: " << prev <<
-        //     ", data: " << data << endl;
     }
 
     return 0;
