@@ -93,7 +93,7 @@
 | SMD_NetworkManager_02 | virtual void Send(int32_t data) override | 데이터를 전송한다. | SAD_3 |
 
 ### 클래스 다이어그램
-> ![RaspberryController_Class_Diagram_2](https://github.com/RU-Developer/RaspberryController/assets/61056453/0dddd3f2-6b0f-43c6-b7ed-ebe182223ce7)
+> ![RaspberryController_Class_Diagram_3](https://github.com/RU-Developer/RaspberryController/assets/61056453/33f751b2-44f6-446b-8c2c-c3e50b72cb25)
 
 - - -
 

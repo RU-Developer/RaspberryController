@@ -38,7 +38,7 @@ void JoyStick::Init()
 int JoyStick::GetInputValue()
 {
     // 반대 값이 버튼의 눌림 유무
-    return !static_cast<bool>(digitalRead(_buttonPinNumber));
+    return !digitalRead(_buttonPinNumber);
 }
 
 void JoyStick::SPIChannelInit()
