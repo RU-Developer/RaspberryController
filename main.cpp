@@ -9,6 +9,7 @@
 #include "NetworkManager.h"
 #include "Module.h"
 #include "JoyStick.h"
+#include "Button.h"
 
 using namespace std;
 
@@ -33,6 +34,14 @@ int main()
     JoyStick aimingStick(ModuleType::AimingJoyStick);
     aimingStick.Init();
 
+    // Button1
+    Button btn1(1);
+    btn1.Init();
+
+    // Button2
+    Button btn2(2);
+    btn2.Init();
+
     // Wireless Communication
     WirelessManager* manager = new NetworkManager();
     manager->Init();
@@ -47,13 +56,9 @@ int main()
         if (movingStickCoordinate.x >= 500 && movingStickCoordinate.x <= 550)
             data |= (0b10 << 29); // 왼쪽에서 2번째 부터 3번째까지 오른쪽에서 30번째까지
         else if (movingStickCoordinate.x < 500)
-        {
             data |= (0b00 << 29); // 왼쪽에서 2번째 부터 3번째까지 오른쪽에서 30번째까지
-        }
         else
-        {
             data |= (0b01 << 29); // 왼쪽에서 2번째 부터 3번째까지 오른쪽에서 30번째까지
-        }
 
         // 조준 조이스틱을 움직였으면 조준 조이스틱으로 조준.
         if ((aimingStickCoordinate.x > 550 || aimingStickCoordinate.x < 500) &&
@@ -74,7 +79,8 @@ int main()
         data |= (aimingStick.GetInputValue() << 7); // 왼쪽에서 25번째 오른쪽에서 8번째
 
         // 일반 버튼 값 1 ~ 7
-
+        data |= (btn1.GetInputValue() << 6);
+        data |= (btn2.GetInputValue() << 5);
 
         // 데이터 전송
         // 이전과 데이터가 달라야만 전송.

@@ -7,8 +7,17 @@ enum GPIO_PIN_NUMBER
     GPN_SPIClock = 11, // 클락 펄스
     GPN_SPIDataInput = 9, // MCP_3008 ADC의 Data out
     GPN_SPIDataOutput = 10, // MCP_3008 ADC의 Data in
+    
     GPN_MovingButton = 5, // 움직임 조작 조이스틱의 버튼
     GPN_AimingButton = 6, // 조준 조작 조이스틱의 버튼
+
+    GPN_Button1 = 17, // 버튼 1번
+    GPN_Button2 = 27, // 버튼 2번
+    GPN_Button3 = 27, // 버튼 3번
+    GPN_Button4 = 27, // 버튼 4번
+    GPN_Button5 = 27, // 버튼 5번
+    GPN_Button6 = 27, // 버튼 6번
+    GPN_Button7 = 27, // 버튼 7번
 };
 
 enum SPI
