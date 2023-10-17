@@ -3,6 +3,7 @@
 
 #include "Enums.h"
 #include "PacketGenerator.h"
+#include "Managers.h"
 #include "ModuleManager.h"
 #include "Module.h"
 #include "JoyStick.h"
@@ -18,9 +19,11 @@ PacketGenerator::~PacketGenerator()
 
 }
 
+// MSB(1) Move(2) AimingX(10) AimingY(10)
+// MovingJoyBtn(1) AimingJoyBtn(1) Btn1 ~ Btn7 (7)
 int32_t PacketGenerator::Generate()
 {
-    ModuleManager* moduleMgr = ModuleManager::GetInstance();
+    ModuleManager* moduleMgr = Managers::GetModule();
     vector<Module*>& modules = moduleMgr->GetModules();
 
     int32_t data = 0;
