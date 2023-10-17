@@ -87,14 +87,13 @@
 | SMD_Button_02 | virtual void Init() override | GPIO 핀모드를 설정한다. | SAD_1 |
 | SMD_Button_03 | int GetButtonNumber() | 버튼의 번호를 반환한다. | SAD_1 |
 | SMD_PacketGenerator_01 | int32_t Generate() | 모듈 매니저를 통해 모듈을 가져와서 모든 모듈의 입력값을 받아서 32bit 정수형 타입으로 만들어서 반환한다.<br />MSB(1) 움직임(2)(가만히 10 왼쪽 00 오른쪽 01) 조준x좌표(10) 조준y좌표(10) 조이스틱L버튼(1) 조이스틱R버튼(1) 버튼1~7(7) | SAD_2 |
-| SMD_WirelessController_01 | void Init() | WirelessManager를 통해 무선통신을 연결하고, 연결이 성공하면 보내기 시작할 수 있다. | SAD_3 |
-| SMD_WirelessController_02 | void IfChangedThenWrite() | 보내야 할 패킷이 이전의 패킷과 다르다면 전송한다. | SAD_3 |
+| SMD_WirelessController_01 | void SendIfModified() | 보내야 할 패킷이 이전의 패킷과 다르다면 전송한다. | SAD_3 |
 | SMD_WirelessManager_01 | virtual void Init() abstract | 네트워크를 연결한다. | SAD_3 |
 | SMD_WirelessManager_02 | virtual void Send(int32_t data) abstract | 데이터를 전송한다. | SAD_3 |
 | SMD_NetworkManager_01 | virtual void Init() override | 이더넷 UDP로 유니티 클라이언트를 찾아서 TCP 세션을 연결한다. | SAD_3 |
 | SMD_NetworkManager_02 | virtual void Send(int32_t data) override | 데이터를 전송한다. | SAD_3 |
 
 ### 클래스 다이어그램
-> ![RaspberryController_Class_Diagram_5](https://github.com/RU-Developer/RaspberryController/assets/61056453/62473aad-dc94-45ff-8001-f69c1d5b5918)
+> ![RaspberryController_Class_Diagram_6](https://github.com/RU-Developer/RaspberryController/assets/61056453/9099e323-fbc0-49fe-ba4b-d4378b64f7a5)
 
 - - -

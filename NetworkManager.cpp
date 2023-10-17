@@ -14,6 +14,7 @@ NetworkManager::NetworkManager()
     _udpSock = -1;
     _tcpSock = -1;
     _clientSock = -1;
+    Init();
 }
 
 NetworkManager::~NetworkManager()

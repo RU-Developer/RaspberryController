@@ -11,7 +11,7 @@ find_library(WIRINGPI_LIBRARIES NAMES wiringPi)
 # find_library(BLUETOOTH_LIBRARIES NAMES bluetooth)
 
 # 실제 실행 파일 추가
-add_executable(RaspberryController main.cpp Module.cpp JoyStick.cpp WirelessManager.cpp NetworkManager.cpp Button.cpp ModuleManager.cpp PacketGenerator.cpp)
+add_executable(RaspberryController main.cpp Module.cpp JoyStick.cpp WirelessManager.cpp NetworkManager.cpp Button.cpp ModuleManager.cpp PacketGenerator.cpp Managers.cpp WirelessController.cpp)
 # 라이브러리를 링크
 # target_link_libraries(RaspberryController ${WIRINGPI_LIBRARIES} ${BLUETOOTH_LIBRARIES} pthread)
 target_link_libraries(RaspberryController ${WIRINGPI_LIBRARIES} pthread)
