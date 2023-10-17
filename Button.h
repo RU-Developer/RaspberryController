@@ -12,6 +12,8 @@ public:
     virtual void Init() override;
     virtual int GetInputValue() override;
 
+    int GetButtonNumber() { return _buttonNumber; }
+
 private:
     unsigned char _buttonPinNumber;
     int _buttonNumber;

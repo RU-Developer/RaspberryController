@@ -1,6 +1,11 @@
 #ifndef __Enums__
 #define __Enums__
 
+enum ModuleMetaData
+{
+    MMD_ButtonMaxNumber = 7
+};
+
 enum GPIO_PIN_NUMBER
 {
     GPN_SPIChannel = 8, // MCP_3008 ADC의 CS핀을 GPIO 8번으로 설정
@@ -42,5 +47,31 @@ enum class ModuleType
     Button
 };
 
+// Bit Shift 연산을 위한 정보
+enum BitMaskLayer
+{
+    BML_Button7 = 0,
+    BML_Button6 = 1,
+    BML_Button5 = 2,
+    BML_Button4 = 3,
+    BML_Button3 = 4,
+    BML_Button2 = 5,
+    BML_Button1 = 6,
+
+    BML_AimingStickButton = 7,
+    BML_MovingStickButton = 8,
+
+    BML_JoyStickPosY = 9,
+    BML_JoyStickPosX = 19,
+
+    BML_Move = 29
+};
+
+// 500 ~ 550 사이의 값이면 조이스틱을 건드리지 않은 것으로 인식하겠음
+enum JoyStickLimit
+{
+    JSL_SmallLimit = 500,
+    JSL_BigLimit = 550
+};
 
 #endif
