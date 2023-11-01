@@ -67,11 +67,31 @@ enum BitMaskLayer
     BML_Move = 29
 };
 
+enum BitFlag
+{
+    BF_Button7 = 0x00000001,
+    BF_Button6 = 0x00000002,
+    BF_Button5 = 0x00000004,
+    BF_Button4 = 0x00000008,
+    BF_Button3 = 0x00000010,
+    BF_Button2 = 0x00000020,
+    BF_Button1 = 0x00000040,
+    
+    BF_AimingStickButton = 0x00000080,
+    BF_MovingStickButton = 0x00000100,
+
+    BF_JoyStickPosY = 0x0007FE00,
+    BF_JoyStickPosX = 0x1FF80000,
+
+    BF_Move = 0x60000000
+};
+
 // 500 ~ 550 사이의 값이면 조이스틱을 건드리지 않은 것으로 인식하겠음
 enum JoyStickLimit
 {
     JSL_SmallLimit = 500,
-    JSL_BigLimit = 550
+    JSL_BigLimit = 550,
+    JSL_Resolution = 5
 };
 
 #endif
