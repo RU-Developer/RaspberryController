@@ -91,7 +91,7 @@ enum JoyStickLimit
 {
     JSL_SmallLimit = 500,
     JSL_BigLimit = 550,
-    JSL_Resolution = 5
+    JSL_Resolution = 2
 };
 
 #endif

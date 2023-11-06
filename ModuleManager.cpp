@@ -11,7 +11,7 @@ using namespace std;
 
 ModuleManager::ModuleManager()
 {
-    Init();
+    
 }
 
 ModuleManager::~ModuleManager()
@@ -44,14 +44,14 @@ void ModuleManager::CreateModule(ModuleType type, int buttonNumber/*default 0*/)
     {
     case ModuleType::AimingJoyStick:
     {
-        JoyStick* stick = new JoyStick(type);
+        JoyStick* stick = new JoyStick(ModuleType::AimingJoyStick);
         stick->Init();
         _modules.push_back(stick);
         break;
     }
     case ModuleType::MovingJoyStick:
     {
-        JoyStick* stick = new JoyStick(type);
+        JoyStick* stick = new JoyStick(ModuleType::MovingJoyStick);
         stick->Init();
         _modules.push_back(stick);
         break;

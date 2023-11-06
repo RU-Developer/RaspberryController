@@ -38,7 +38,9 @@ void Managers::Init()
     pinMode(GPN_SPIChannel, OUTPUT);
 
     s_module = new ModuleManager();
+    s_module->Init();
     s_wireless = new NetworkManager();
+    s_wireless->Init();
 }
 
 ModuleManager* Managers::GetModule()

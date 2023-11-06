@@ -97,3 +97,6 @@
 > ![RaspberryController_Class_Diagram_6](https://github.com/RU-Developer/RaspberryController/assets/61056453/9099e323-fbc0-49fe-ba4b-d4378b64f7a5)
 
 - - -
+
+## 유닛 테스트
+> ![RaspberryController_Test](https://github.com/RU-Developer/RaspberryController/assets/61056453/a5cd5ecc-8ba2-48ba-a4c1-1e2c51373adf)
