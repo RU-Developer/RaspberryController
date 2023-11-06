@@ -32,7 +32,7 @@ protected:
     void SPIChannelClose(); // 통신 종료
 
 public:
-    Coordinate GetCoordinate(); // 조이스틱 x, y좌표 반환
+    virtual Coordinate GetCoordinate(); // 조이스틱 x, y좌표 반환
 };
 
 #endif

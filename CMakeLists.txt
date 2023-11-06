@@ -19,7 +19,7 @@ target_link_libraries(RaspberryController ${WIRINGPI_LIBRARIES} pthread)
 # Google Test 라이브러리를 찾음
 find_package(GTest REQUIRED)
 # 테스트 실행 파일 추가
-add_executable(RaspberryControllerTest test_main.cpp)
+add_executable(RaspberryControllerTest test_main.cpp Module.cpp JoyStick.cpp WirelessManager.cpp NetworkManager.cpp Button.cpp ModuleManager.cpp PacketGenerator.cpp Managers.cpp WirelessController.cpp)
 # wiringPi와 GoogleTest 라이브러리 + pthread를 링크
 # target_link_libraries(RaspberryControllerTest ${WIRINGPI_LIBRARIES} ${GTEST_LIBRARIES} ${BLUETOOTH_LIBRARIES} pthread)
 target_link_libraries(RaspberryControllerTest ${WIRINGPI_LIBRARIES} ${GTEST_LIBRARIES} pthread)

@@ -14,7 +14,7 @@ public:
     static WirelessManager* GetWireless();
     void Clear();
 
-private:
+protected:
     Managers();
     static Managers* s_instance;
     static ModuleManager* s_module;
