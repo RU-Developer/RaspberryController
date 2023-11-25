@@ -18,9 +18,9 @@ enum GPIO_PIN_NUMBER
 
     GPN_Button1 = 17, // 버튼 1번
     GPN_Button2 = 27, // 버튼 2번
-    GPN_Button3 = 27, // 버튼 3번
-    GPN_Button4 = 27, // 버튼 4번
-    GPN_Button5 = 27, // 버튼 5번
+    GPN_Button3 = 16, // 버튼 3번
+    GPN_Button4 = 20, // 버튼 4번
+    GPN_Button5 = 22, // 버튼 5번
     GPN_Button6 = 27, // 버튼 6번
     GPN_Button7 = 27, // 버튼 7번
 };
