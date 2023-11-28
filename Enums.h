@@ -89,7 +89,7 @@ enum BitFlag
 // 500 ~ 550 사이의 값이면 조이스틱을 건드리지 않은 것으로 인식하겠음
 enum JoyStickLimit
 {
-    JSL_SmallLimit = 500,
+    JSL_SmallLimit = 480,
     JSL_BigLimit = 550,
     JSL_Resolution = 2
 };
